@@ -12,6 +12,11 @@ export default [
     path: '/search', //登录
     meta: { auth: false },
     component: resolve => require(['../modules/search/search.vue'], resolve)
+  },{
+    name: 'home',
+    path: '/home', //首页
+    meta: { auth: true },
+    component: resolve => require(['../modules/home/home.vue'], resolve)
   },
       //{
       //  path: '/signout', //退出
