@@ -1,0 +1,39 @@
+body {
+  font-family: miranafont, "Hiragino Sans GB", STXihei, "Microsoft YaHei", SimSun, sans-serif;
+}
+.form-control {
+  box-shadow: none;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+button.btn-primary {
+  background-color: #3499ef;
+  border-color: #3ea5ff;
+}
+button.btn-primary:hover {
+  background-color: #3499ef;
+  border-color: #3ea5ff;
+}
+button.btn-primary:focus {
+  background-color: #0089ff;
+  border-color: #0074d6;
+}
+button.btn-primary:active {
+  background-color: #0074d8;
+  border-color: #0373d4;
+}
+.form-wrap {
+  border: 1px solid #eee;
+  box-shadow: 1px 4px 6px #eee;
+  width: 310px;
+  padding: 15px;
+  margin: 85px auto;
+  overflow: hidden;
+}
+.form-wrap h1 {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
