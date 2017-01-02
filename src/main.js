@@ -4,6 +4,7 @@ import axios from 'axios';
 import VueRouter from 'vue-router';
 import routes from './config/routes.js';
 import commonAjax from './common/commonAjax.js'
+import store from './store'
 
 Vue.use(VueRouter);
 Vue.config.devtools = true;
@@ -19,10 +20,13 @@ router.beforeEach(({meta, path}, from, next) => {
   //  return next({ path: '/search' });
   //}
   next();
+
 });
+
 
 const app = new Vue({
   el: '#app',
+  store,
   router,
   axios,
   commonAjax,

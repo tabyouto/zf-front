@@ -1,9 +1,36 @@
-//html,
-//body {
-//  height: 100%;
-//}
+@font-face {
+  font-family: 'iconfont';  /* project id 212950 */
+  src: url('//at.alicdn.com/t/font_t0p593u0sy8pvi.eot');
+  src: url('//at.alicdn.com/t/font_t0p593u0sy8pvi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_t0p593u0sy8pvi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_t0p593u0sy8pvi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_t0p593u0sy8pvi.svg#iconfont') format('svg');
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.iconFont{
+  font-family: 'iconfont';
+  font-size: 16px;
+  font-style:normal;
+}
 body {
   font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+  &>div {
+    min-height: 100%;
+    height: auto !important;
+    padding-bottom: 27px;
+    position: relative;
+  }
+}
+a {
+  &:hover {
+    text-decoration: none;
+  }
+  text-decoration: none;
 }
 .form-control {
   &:focus {
@@ -27,6 +54,13 @@ button.btn-primary {
     border-color: #0373d4;
   }
 }
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
 
 
 
@@ -45,6 +79,107 @@ button.btn-primary {
   }
   width: 310px;
   padding: 15px;
-  margin: 85px auto;
+  margin: 40px auto;
   overflow: hidden;
+}
+
+.notification,
+.head,
+.ranking,
+.ranking-wrap{
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+
+.home-part {
+  overflow: hidden;
+  margin: 0 auto;
+}
+.head-wrap {
+  border-bottom: 1px solid #ddd;
+}
+.head {
+
+  line-height: 44px;
+  overflow: hidden;
+  h1 {
+    float: left;
+    line-height: 64px;
+    margin: 0;
+  }
+  .nav {
+    ul {
+      li {
+        float: left;
+        margin-right: 10px;
+        a {
+          margin-top:  10px;
+          padding: 4px 15px;
+          display: block;
+        }
+      }
+    }
+  }
+}
+.notification {
+  padding: 12px 10px;
+  border-bottom: 1px dashed #ddd;
+  span {
+    margin-left: 10px;
+    color: #757575;
+  }
+}
+.ranking-wrap {
+  margin-bottom: 25px;
+}
+.ranking {
+  .ranking-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .avatar {
+    float: left;
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.11);
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  li {
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .item-wrap {
+    margin-left: 72px;
+    p {
+      margin: 10px 0 5px 0;
+      color: #696969;
+    }
+    .score {
+      position: relative;
+      display: block;
+      float: right;
+      margin-right: 42px;
+      color: rgba(255, 86, 31, 0.78);
+      &:after {
+        content: '绩点';
+        position: absolute;
+        width: 32px;
+        left: 26px;
+      }
+    }
+    .progress {
+      height: 5px;
+    }
+    .progress-bar {
+      transition: 1s all ease;
+      background-color: #FE7F5F;
+    }
+  }
 }

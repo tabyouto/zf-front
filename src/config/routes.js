@@ -6,7 +6,13 @@ export default [
   {
     name: 'index',
     path: '/',
-    component: App
+    component: resolve => require(['../modules/home/home.vue'], resolve),
+    children: [
+      {
+        path: 'login',
+        component: resolve => require(['../modules/search/search.vue'], resolve),
+      }
+    ]
   },{
     name: 'search',
     path: '/search', //登录
@@ -16,7 +22,18 @@ export default [
     name: 'home',
     path: '/home', //首页
     meta: { auth: true },
-    component: resolve => require(['../modules/home/home.vue'], resolve)
+    component: resolve => require(['../modules/home/home.vue'], resolve),
+    children: [
+      {
+        path: 'login',
+        component: resolve => require(['../modules/search/search.vue'], resolve),
+      },{
+        path: 'ranking',
+        name: 'ranking',
+        component: resolve => require(['../modules/ranking/ranking.vue'], resolve),
+      }
+    ]
+
   },
       //{
       //  path: '/signout', //退出
@@ -33,6 +50,7 @@ export default [
       //},
     {
       path: '*', //其他页面，强制跳转到登录页面
-      redirect: '../modules/search/search.vue'
+      redirect: { name: 'ranking'}
+
     }
 ]
