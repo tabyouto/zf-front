@@ -76,7 +76,8 @@ ul li {
 .notification,
 .head,
 .ranking,
-.ranking-wrap {
+.ranking-wrap,
+.schedule-wrap {
   max-width: 900px;
   margin: 0 auto;
 }
@@ -108,6 +109,7 @@ ul li {
 .notification {
   padding: 12px 10px;
   border-bottom: 1px dashed #ddd;
+  margin-bottom: 10px;
 }
 .notification span {
   margin-left: 10px;
@@ -162,4 +164,23 @@ ul li {
 .ranking .item-wrap .progress-bar {
   transition: 1s all ease;
   background-color: #FE7F5F;
+}
+.schedule-wrap .form-group .col-md-2 {
+  padding: 0;
+}
+.schedule-wrap .form-control-static {
+  display: inline-block;
+}
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+tr,
+td {
+  font-size: 12px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #eee;
+  vertical-align: middle;
+  font-family: 'MicroSoft YaHei';
 }

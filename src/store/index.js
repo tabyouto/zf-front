@@ -12,7 +12,7 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 const state = {
-    isLogin: false
+    isLogin: sessionStorage.getItem('isLogin') == 'true' ? true : false
 };
 
 export default new Vuex.Store({

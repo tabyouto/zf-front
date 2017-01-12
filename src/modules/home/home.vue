@@ -8,15 +8,15 @@
 
                 <div class="nav pull-right">
                     <ul>
-                        <li><a class="" href="javascript:;">查询绩点</a></li>
-                        <li><a class="" href="javascript:;">查询课表</a></li>
+                        <li><router-link v-bind:to="{ name: 'scoreSearch'}">查询绩点</router-link></li>
+                        <li><router-link v-bind:to="{ name: 'scheduleSearch'}">查询课表</router-link></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="notification">
             <i class="iconFont">&#xe7ef;</i> <span class="notification-content">如有bug请提交</span>
-        </div>{{isLogin}}
+        </div>
         <router-view></router-view>
 
     </div>
@@ -40,6 +40,11 @@
             LoadingComponent
         },
         methods: {
+        },
+        created() {
+          if(this.$route.path == '/') {
+            this.$router.push({path:'/home/ranking'})
+          }
         }
     }
 </script>
