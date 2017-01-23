@@ -9,7 +9,7 @@ const HOST = host();
 let userInfo = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : '';
 const commonData = {
   //debug: true,
-  token: 'kjdghksh3hk1h2h1oi2o12o',
+  token: '',
   class_passwd: userInfo.class_passwd || undefined,
   class_number: userInfo.class_number || undefined
 };
@@ -17,32 +17,44 @@ const commonData = {
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 export function fetch(data) {
-    var _target = {};
-    Object.assign(_target, commonData ,data.data);
-    return axios({
-        method: 'post',
-        url: HOST.api + data.url,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        data: qs.stringify(_target),
-        validateStatus: function (status) {
-          console.log(status);
-          return status !== '200'; // Reject only if the status code is greater than or equal to 500
-        }
-    }).then(function(response) {
-      console.log('first then',response)
-      if(response.data.ret==1) {
-        return response.data.data;
-      }else {
-        throw '真不幸，请再试一次';
+  var _target = {};
+  Object.assign(_target, commonData, data.data);
+  return axios({
+    method: 'post',
+    url: HOST.api + data.url,
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    data: qs.stringify(_target),
+    //validateStatus: function (status) {
+    //  console.log(status);
+    //  return status != '200'; // Reject only if the status code is greater than or equal to 500
+    //}
+  }).then(function (response) {
+    console.log(response.data.ret);
+    if(response.data.ret == 1) {
+      alert(1);
+    }else {
+      if(response.data.ret == 1111) {
+        throw '请重新登录';
       }
-    },function(err) {
-      console.log('进入reject',err);
-      alert('哎呀，失败啦~请稍后重试');
-      return false;
-    }).catch(function(error) {
-      alert(error);
-      return false;
-    })
+    }
+    //if (response.data.ret == 1) {
+    //console.log(response.data)
+    //  return response.data.data;
+    //} else {
+    //    console.log(_self.$route);
+    //    console.log(1122);
+    //  if (response.data.ret == 1111) {
+    //  } else {
+    //    console.log(11);
+    //    //throw '真不幸，请再试一次';
+    //  }
+    //}
+  }).catch(function (error) {
+
+    !(/(Error)/.test(error)) && alert(error);
+    window.location.href = './'
+    return false;
+  })
 
 }
 /**

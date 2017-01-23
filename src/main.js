@@ -32,6 +32,15 @@ router.beforeEach(({meta, path}, from, next) => {
 
 });
 
+var socket = io('http://test1.com');
+socket.on('connect', function(){
+  console.log('连接成功')
+});
+socket.on('finishAllDegree',function(e) {
+  console.log('进度',e.progress);
+});
+socket.on('event', function(data){});
+socket.on('disconnect', function(){});
 
 const app = new Vue({
   el: '#app',

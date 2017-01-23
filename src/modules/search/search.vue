@@ -55,8 +55,8 @@
           class_number: this.classNumber,
           class_passwd: this.classPasswd
         }).then(function (res) {
-          console.log(res);
-          if (res) {
+          console.log('woshi',res);
+          if (res && _type == 'schedule') {
             that.changeLogin(true);
             sessionStorage.setItem('isLogin', true);
             sessionStorage.setItem('scheduleInfo', JSON.stringify(res));
@@ -65,6 +65,8 @@
             that.$router.replace({path: '/home/schedule'})
           } else {
   //          alert('出错了，请重试');
+            alert('cha')
+
           }
           that.editFlag = false;
         });

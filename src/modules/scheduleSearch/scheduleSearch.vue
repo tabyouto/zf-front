@@ -65,7 +65,9 @@
           year: this.yearSelected,
           termSelected: this.termSelected
         }).then(function(res) {
+          if(res) {
             _self.scheduleHtml = res.tableHtml;
+          }
         });
       },
     }

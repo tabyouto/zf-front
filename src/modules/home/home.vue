@@ -3,7 +3,7 @@
         <div class="head-wrap">
             <div class="head">
                 <h1>
-                    <a class="logo" href="javascript:;">oxox</a>
+                    <router-link v-bind:to="{name: 'ranking'}">oxox</router-link>
                 </h1>
 
                 <div class="nav pull-right">
