@@ -46,11 +46,8 @@
       sub: function () {
         this.editFlag = true;
         var that = this;
-        var _type = '';
-        var currentItem = sessionStorage.getItem('currentFrom');
-        if (currentItem) {
-          currentItem == '/home/score' ? _type = 'score' : _type = 'schedule';
-        }
+        localStorage.setItem('userNumber',classNumber);
+        localStorage.setItem('classPasswd',classPasswd);
 //        if(!that.socketInfo.sid) {
 //          alert('网络异常，请刷新页面');
 //          return;
@@ -64,11 +61,6 @@
           clientId: that.socketInfo.clientCreateId
         }).then(function (res) {
           if (res && _type == 'schedule') {
-            that.changeLogin(true);
-            sessionStorage.setItem('isLogin', true);
-            sessionStorage.setItem('scheduleInfo', JSON.stringify(res));
-            sessionStorage.setItem('userInfo', JSON.stringify({'class_number':that.classNumber,'class_passwd':that.classPasswd}));
-            sessionStorage.removeItem('currentFrom');
             that.$router.replace({path: '/home/schedule'})
           }
           if(res && _type == 'score') {

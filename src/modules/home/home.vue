@@ -3,21 +3,21 @@
         <div class="head-wrap">
             <div class="head">
                 <h1>
-                    <router-link v-bind:to="{name: 'ranking'}">oxox</router-link>
+                    <router-link v-bind:to="{name: 'ranking'}"></router-link>
                 </h1>
 
                 <div class="nav pull-right">
                     <ul>
-                        <li><router-link v-bind:to="{ name: 'scoreSearch'}">查询绩点</router-link></li>
-                        <li><router-link v-bind:to="{ name: 'scheduleSearch'}">查询课表</router-link></li>
+                        <li><router-link v-bind:to="{ name: 'scoreSearch', activeClass:'active',exact: true }">种子搜索</router-link></li>
+                        <li><router-link v-bind:to="{ name: 'scoreSearch', activeClass:'active'}">查询绩点</router-link></li>
+                        <li><router-link v-bind:to="{ name: 'scheduleSearch', activeClass:'active'}">查询课表</router-link></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="notification">
-            <i class="iconFont">&#xe7ef;</i> <span class="notification-content">如有bug请提交</span>
+        <div class="content-container">
+            <router-view></router-view>
         </div>
-        <router-view></router-view>
 
     </div>
 </template>

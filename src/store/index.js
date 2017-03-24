@@ -12,7 +12,11 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 const state = {
-    isLogin: sessionStorage.getItem('isLogin') == 'true' ? true : false
+    isLogin: sessionStorage.getItem('isLogin') == 'true' ? true : false,
+    socketInfo: {
+      sid: sessionStorage.getItem('sid') ? sessionStorage.getItem('sid') : '',
+      clientCreateId: sessionStorage.getItem('clientId') ? sessionStorage.getItem('clientId') : ''
+    }
 };
 
 export default new Vuex.Store({

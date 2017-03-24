@@ -19,6 +19,7 @@ body {
 }
 body {
   font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif;
+  //background: url("../images/bgbody.gif") repeat;
   &>div {
     min-height: 100%;
     height: auto !important;
@@ -28,6 +29,9 @@ body {
 }
 a {
   &:hover {
+    text-decoration: none;
+  }
+  &:focus {
     text-decoration: none;
   }
   text-decoration: none;
@@ -87,8 +91,9 @@ ul {
 .head,
 .ranking,
 .ranking-wrap,
-.schedule-wrap{
-  max-width: 900px;
+.schedule-wrap,
+.content-container{
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -98,27 +103,48 @@ ul {
   overflow: hidden;
   margin: 0 auto;
 }
+.content-container {
+  background-color: #fff;
+  overflow: hidden;
+}
 .head-wrap {
-  border-bottom: 1px solid #ddd;
+  //border-bottom: 1px solid #fff;
+  background-color: #fff;
 }
 .head {
-
-  line-height: 44px;
+  line-height: 57px;
   overflow: hidden;
   h1 {
     float: left;
-    line-height: 64px;
+    line-height: 70px;
     margin: 0;
+    a {
+      margin-top: 20px;
+      display: block;
+      width: 48px;
+      height: 42px;
+      background: url("../images/logo.png") no-repeat center;
+
+      -webkit-background-size:contain;
+      background-size:contain;
+    }
   }
   .nav {
     ul {
       li {
         float: left;
         margin-right: 10px;
+        margin-bottom: -3px;
+        border-bottom: 3px solid transparent;
+        padding: 3px 15px 0;
         a {
+          color: #777777;
           margin-top:  10px;
-          padding: 4px 15px;
           display: block;
+          border-bottom: 2px solid transparent;
+          &:hover{
+            border-bottom: 2px solid #68a1ff;
+          }
         }
       }
     }
@@ -207,4 +233,28 @@ tr,td {
   border: 1px solid #eee;
   vertical-align: middle;
   font-family: 'MicroSoft YaHei';
+}
+
+
+
+
+/***************************/
+.left-score,
+.right-schedule{
+  height: 200px;
+  text-align: center;
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 200px;
+    color: #fff;
+  }
+
+}
+.left-score {
+  background-color: rgb(68, 145, 255);
+}
+.right-schedule {
+  background-color: #6f43ff;
 }

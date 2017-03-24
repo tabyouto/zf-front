@@ -5,3 +5,8 @@ export const changeLogin = ({ commit }, loginStatus) => {
         isLogin: loginStatus
     })
 };
+export const saveSid = ({ commit }, obj) => {
+    commit(types.SID, {
+        obj: obj
+    })
+};

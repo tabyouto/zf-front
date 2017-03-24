@@ -7,7 +7,7 @@ const HOST = host();
 
 //公共参数
 let userInfo = sessionStorage.getItem('userInfo') ? JSON.parse(sessionStorage.getItem('userInfo')) : '';
-const commonData = {
+let commonData = {
   //debug: true,
   token: '',
   class_passwd: userInfo.class_passwd || undefined,
@@ -23,7 +23,7 @@ export function fetch(data) {
     method: 'post',
     url: HOST.api + data.url,
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    data: qs.stringify(_target),
+    data: qs.stringify(_target)
     //validateStatus: function (status) {
     //  console.log(status);
     //  return status != '200'; // Reject only if the status code is greater than or equal to 500
@@ -31,28 +31,25 @@ export function fetch(data) {
   }).then(function (response) {
     console.log(response.data.ret);
     if(response.data.ret == 1) {
-      alert(1);
+      commonData.class_number = data.data.class_number;
+      commonData.class_passwd = data.data.class_passwd;
+      return response.data.data;
     }else {
       if(response.data.ret == 1111) {
         throw '请重新登录';
       }
     }
-    //if (response.data.ret == 1) {
-    //console.log(response.data)
-    //  return response.data.data;
-    //} else {
-    //    console.log(_self.$route);
-    //    console.log(1122);
-    //  if (response.data.ret == 1111) {
-    //  } else {
-    //    console.log(11);
-    //    //throw '真不幸，请再试一次';
-    //  }
-    //}
+    if(response.data.ret == 1112) {
+      alert('教务服务器太渣，请重试');
+    }
   }).catch(function (error) {
 
-    !(/(Error)/.test(error)) && alert(error);
-    window.location.href = './'
+    if(!(/(Error)/.test(error))){
+      alert(error);
+    }else {
+      alert('oh~ 请重试');
+    }
+    //window.location.href = './'
     return false;
   })
 

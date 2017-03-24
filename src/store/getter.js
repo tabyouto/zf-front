@@ -12,3 +12,8 @@
 export const getLogin = state => {
     return state.isLogin;
 }
+
+
+export const getSocketInfo = state => {
+  return state.socketInfo;
+}

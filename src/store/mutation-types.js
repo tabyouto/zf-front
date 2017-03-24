@@ -5,3 +5,4 @@
 // export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS'
 
 export const LOGIN_STATUS = 'LOGIN_STATUS';
+export const SID = 'SID';

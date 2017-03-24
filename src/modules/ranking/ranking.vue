@@ -1,7 +1,7 @@
 <template>
     <div class="ranking-wrap">
         <score-module></score-module>
-        <teacher-module></teacher-module>
+        <!--<teacher-module></teacher-module>-->
     </div>
 </template>
 <script>

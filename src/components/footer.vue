@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <p class="copyright"> &copy;   {{myDate}} 技术支持 <a :href="website" target="__blank">Chiem的屋顶</a></p>
+        <p class="copyright"> &copy;   {{myDate}} 技术支持 <a :href="website" target="_blank">noxxxx</a></p>
     </div>
 </template>
 <style lang='less'>
@@ -20,7 +20,7 @@
     export default{
         data(){
             return{
-                website: 'http://baidu.com',
+                website: 'https://www.noxxxx.com',
                 myDate: (new Date()).getFullYear(),
 
             }

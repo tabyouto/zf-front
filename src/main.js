@@ -14,33 +14,53 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach(({meta, path}, from, next) => {
-  var { auth = true } = meta;
-  var isLogin = store.state.isLogin; //true用户已登录， false用户未登录
-  console.log('state:--------'+store.state.isLogin);
-  console.log(path);
-  console.log('from======='+from.path);
-  if (auth && !isLogin) {
-    if(path == '/home/score' || path=='/home/schedule') {
-      sessionStorage.setItem('currentFrom',path); //记录要查询类型
-    }
-    return next({ path: '/home/login' });
-  }
-  if((path.length==1 || path=='/home/login') && isLogin) {
-    return next({ path: '/home/ranking' });
-  }
+  // var { auth = true } = meta;
+  // var isLogin = store.state.isLogin; //true用户已登录， false用户未登录
+  // if (auth && !isLogin) {
+  //   if(path == '/home/score' || path=='/home/schedule') {
+  //     sessionStorage.setItem('currentFrom',path); //记录要查询类型
+  //   }
+  //   return next({ path: '/home/login' });
+  // }
+  // if((path.length==1 || path=='/home/login') && isLogin) {
+  //   return next({ path: '/home/ranking' });
+  // }
   next();
 
 });
 
-var socket = io('http://test1.com');
-socket.on('connect', function(){
-  console.log('连接成功')
-});
-socket.on('finishAllDegree',function(e) {
-  console.log('进度',e.progress);
-});
-socket.on('event', function(data){});
-socket.on('disconnect', function(){});
+// var socket = io('http://test1.com');
+// socket.on('connect', function(){
+//   console.log('连接成功');
+//   var clientId = Math.random().toString(36).substring(3,16) + +new Date;
+//   var result = '';
+//   if(!sessionStorage.getItem('clientId')) {
+//     sessionStorage.setItem('clientId',clientId);
+//     result = clientId;
+//   }else {
+//     result = sessionStorage.getItem('clientId');
+//   }
+//   app.saveSid({
+//     sid: socket.io.engine.id,
+//     clientId: result
+//   });
+//
+// //通知服务端保存客户端ID
+//   socket.emit('setConnect',{
+//     sid: socket.io.engine.id,
+//     clientId:result
+//   });
+// });
+
+
+
+
+// socket.on('finishAllDegree',function(e) {
+//   console.log('进度',e.progress);
+// });
+//
+//
+// socket.on('disconnect', function(){});
 
 const app = new Vue({
   el: '#app',
@@ -48,11 +68,11 @@ const app = new Vue({
   router,
   axios,
   commonAjax,
-  //methods: {
-  //  ...mapActions([
-  //    'changeLogin'
-  //  ]),
-  //},
+  methods: {
+    // ...mapActions([
+    //   'saveSid'
+    // ]),
+  },
   //created () {
   //  // 组件创建完后获取数据，
   //  // 此时 data 已经被 observed 了
