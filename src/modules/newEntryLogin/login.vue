@@ -37,48 +37,41 @@
       'loading-component': LoadingComponent
     },
     computed: {
-      ...mapGetters({
-        isLogin: 'getLogin',
-        socketInfo: 'getSocketInfo'
-      }),
     },
     methods: {
       sub: function () {
         this.editFlag = true;
         var that = this;
-        localStorage.setItem('userNumber',classNumber);
-        localStorage.setItem('classPasswd',classPasswd);
-//        if(!that.socketInfo.sid) {
-//          alert('网络异常，请刷新页面');
-//          return;
-//        }
-        console.log(that.socketInfo.clientCreateId);
-        login({
-          type: _type || undefined,
-          class_number: this.classNumber,
-          class_passwd: this.classPasswd,
-          sid: that.socketInfo.sid,
-          clientId: that.socketInfo.clientCreateId
-        }).then(function (res) {
-          if (res && _type == 'schedule') {
-            that.$router.replace({path: '/home/schedule'})
-          }
-          if(res && _type == 'score') {
-            alert('查成绩');
-            that.changeLogin(true);
-            that.$router.replace({path: '/home/schedule'})
-          }
-          that.editFlag = false;
-        });
+        var _type = localStorage.getItem('type');
+        var _token = sessionStorage.getItem('token');
+        localStorage.setItem('userNumber',this.classNumber);
+        localStorage.setItem('classPasswd',this.classPasswd);
+        if(_type) {
+          login({
+            type: _type || 2,
+            class_number: this.classNumber,
+            class_passwd: this.classPasswd,
+            token: _token,
+          }).then(function (res) {
+            if (res && _type == 2) {
+              localStorage.setItem('scheduleInfo',JSON.stringify(res));
+              that.$router.replace({path: '/schedule'})
+            }
+            if(res && _type == 1) {
+              sessionStorage.setItem('allScore',JSON.stringify(res));
+              that.$router.replace({path: '/score'});
+            }
+            that.editFlag = false;
+          });
+        }else{
+          that.$router.replace({name: 'index'});
+        }
       },
-      ...
-        mapActions([
-          'changeLogin'
-        ]),
-      },
+    },
     created(){
-  //    console.log('login warp'+this.isLogin);
-  //      this.isLogin==true && this.$router.replace({path: '/home/schedule'});
+      if(!localStorage.getItem('type') || !sessionStorage.getItem('token')) {
+          this.$router.replace({name: 'index'});
+      }
     }
   }
 </script>

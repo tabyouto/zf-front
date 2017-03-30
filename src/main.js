@@ -14,7 +14,17 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach(({meta, path}, from, next) => {
-  // var { auth = true } = meta;
+  var { auth = true } = meta;
+  console.log(meta)
+  if(auth) {
+    if(localStorage.getItem('classPasswd')) {
+      next();
+    }else {
+      next({ name: 'index' });
+    }
+  }else {
+    next();
+  }
   // var isLogin = store.state.isLogin; //true用户已登录， false用户未登录
   // if (auth && !isLogin) {
   //   if(path == '/home/score' || path=='/home/schedule') {
@@ -25,41 +35,34 @@ router.beforeEach(({meta, path}, from, next) => {
   // if((path.length==1 || path=='/home/login') && isLogin) {
   //   return next({ path: '/home/ranking' });
   // }
-  next();
 
 });
 
-// var socket = io('http://test1.com');
-// socket.on('connect', function(){
-//   console.log('连接成功');
-//   var clientId = Math.random().toString(36).substring(3,16) + +new Date;
-//   var result = '';
-//   if(!sessionStorage.getItem('clientId')) {
-//     sessionStorage.setItem('clientId',clientId);
-//     result = clientId;
-//   }else {
-//     result = sessionStorage.getItem('clientId');
-//   }
-//   app.saveSid({
-//     sid: socket.io.engine.id,
-//     clientId: result
-//   });
-//
-// //通知服务端保存客户端ID
-//   socket.emit('setConnect',{
-//     sid: socket.io.engine.id,
-//     clientId:result
-//   });
-// });
+var socket = io('http://test1.com');
+socket.on('connect', function(){
+
+//通知服务端保存客户端ID
+  var flag = setTimeout(function () {
+    var token = sessionStorage.getItem('token');
+    if(token) {
+      clearTimeout(flag);
+      socket.emit('setConnect',{
+        sid: socket.io.engine.id,
+        token: token
+      });
+    }
+  },1000);
+});
+
+
+socket.on('finishAllDegree',function(data) {
+  console.log(data);
+});
 
 
 
 
-// socket.on('finishAllDegree',function(e) {
-//   console.log('进度',e.progress);
-// });
-//
-//
+
 // socket.on('disconnect', function(){});
 
 const app = new Vue({

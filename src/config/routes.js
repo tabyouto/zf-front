@@ -79,11 +79,22 @@ export default [
     meta: { auth: false },
     component: resolve => require(['../modules/newEntryLogin/login.vue'], resolve),
   },
+  {
+    name: 'schedule',
+    path: '/schedule',
+    meta: { auth: true },
+    component: resolve => require(['../modules/newEntrySchedule/scheduleSearch.vue'], resolve),
+  },{
+    name: 'score',
+    path: '/score',
+    meta: { auth: true },
+    component: resolve => require(['../modules/newEntryScore/score.vue'], resolve),
+  },
 
 
 
-    {
-      path: '*', //其他页面，强制跳转到登录页面
-      redirect: { path: 'index'}
-    }
+  {
+    path: '*', //其他页面，强制跳转到登录页面
+    redirect: { name: 'index'}
+  }
 ]

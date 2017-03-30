@@ -229,3 +229,38 @@ td {
 .right-schedule {
   background-color: #6f43ff;
 }
+.schedule-wrap {
+  padding: 10px 5px;
+  overflow-x: scroll;
+}
+.schedule-wrap .form-group {
+  margin: 0;
+}
+.schedule-wrap label {
+  margin-top: 10px;
+}
+.schedule-wrap .col-md-2 {
+  margin-bottom: 10px;
+}
+.score-wrap {
+  color: #333;
+  margin-bottom: 50px;
+}
+.score-wrap .btn-wrap {
+  margin-top: 10px;
+  text-align: center;
+}
+.score-wrap .btn-wrap .btn {
+  width: 70%;
+}
+.score-wrap .item-wrap li {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-bottom: 1px dashed #ddd;
+}
+.score-wrap .item-wrap li p {
+  margin: 0;
+}
+.score-wrap .item-wrap li:nth-child(2n) {
+  background-color: #d9edf7;
+}

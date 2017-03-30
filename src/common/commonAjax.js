@@ -75,6 +75,33 @@ export function fetchSpecificSchedule(data) {
     data: data
   });
 };
+
+
+/**
+ * 获取token
+ * @param data
+ */
+export function fetchToken(data) {
+  return fetch({
+    url: 'users/fen',
+    data: data
+  });
+};
+
+
+/**
+ * 获取学位课程
+ * @param data
+ */
+export function fetchDegreeList(data) {
+  return fetch({
+    url: 'users/cal',
+    data: data
+  });
+};
+
+
+
 //
 //
 //export function fetchMoviesByType(type, start=0, count=20) {

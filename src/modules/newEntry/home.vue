@@ -60,14 +60,11 @@
             LoadingComponent
         },
         methods: {
-          sub: function() {
-
-          },
           //跳转到登录页
           checkIsLogin: function(type) {
             localStorage.setItem('type',type);
-            if(localStorage.getItem('isLogin')==true) {
-
+            if(localStorage.getItem('classPasswd') && type == 2 && localStorage.getItem('scheduleInfo')) {
+              this.$router.push({path:'/schedule'});
             }else {
               this.$router.push({path:'/login'})
             }
