@@ -56,6 +56,7 @@ socket.on('connect', function(){
 
 
 socket.on('finishAllDegree',function(data) {
+  console.log('11111');
   console.log(data);
 });
 

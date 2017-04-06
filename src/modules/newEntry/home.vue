@@ -63,8 +63,15 @@
           //跳转到登录页
           checkIsLogin: function(type) {
             localStorage.setItem('type',type);
-            if(localStorage.getItem('classPasswd') && type == 2 && localStorage.getItem('scheduleInfo')) {
-              this.$router.push({path:'/schedule'});
+            if(localStorage.getItem('classPasswd')) {
+              if(type == 2 && localStorage.getItem('scheduleInfo')) {
+                this.$router.push({path:'/schedule'});
+              }
+              if(type == 1 && sessionStorage.getItem('allScore')) {
+                this.$router.push({path:'/score'});
+              }else {
+                this.$router.push({path:'/login'})
+              }
             }else {
               this.$router.push({path:'/login'})
             }

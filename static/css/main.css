@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'iconfont';
-  src: url('//at.alicdn.com/t/font_t0p593u0sy8pvi.eot');
-  src: url('//at.alicdn.com/t/font_t0p593u0sy8pvi.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_t0p593u0sy8pvi.woff') format('woff'), url('//at.alicdn.com/t/font_t0p593u0sy8pvi.ttf') format('truetype'), url('//at.alicdn.com/t/font_t0p593u0sy8pvi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_toiqps7xwmptx1or.eot');
+  src: url('//at.alicdn.com/t/font_toiqps7xwmptx1or.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_toiqps7xwmptx1or.woff') format('woff'), url('//at.alicdn.com/t/font_toiqps7xwmptx1or.ttf') format('truetype'), url('//at.alicdn.com/t/font_toiqps7xwmptx1or.svg#iconfont') format('svg');
   
   /* project id 212950 */
 }
@@ -242,9 +242,37 @@ td {
 .schedule-wrap .col-md-2 {
   margin-bottom: 10px;
 }
+.score-result {
+  padding-left: 20px;
+}
+.score-result h2,
+.score-result h3 {
+  font-size: 18px;
+}
 .score-wrap {
   color: #333;
   margin-bottom: 50px;
+}
+.score-wrap .score-title {
+  font-size: 16px;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  color: #fff;
+  background-color: #33b6ff;
+  margin: 0 0 20px;
+  padding: 17px 0;
+  width: 100%;
+}
+.score-wrap .score-title a {
+  color: #fff;
+}
+.score-wrap .score-title .iconFont {
+  font-size: 22px;
+  float: left;
+  position: absolute;
+  left: 15px;
+  top: 14px;
 }
 .score-wrap .btn-wrap {
   margin-top: 10px;
@@ -253,14 +281,75 @@ td {
 .score-wrap .btn-wrap .btn {
   width: 70%;
 }
+.score-wrap .item-wrap {
+  margin-top: 60px;
+}
+.score-wrap .item-wrap .custom-checkbox {
+  margin-right: 10px;
+  position: relative;
+}
+.score-wrap .item-wrap .custom-checkbox .label--checkbox {
+  position: relative;
+  margin: .5px;
+  font-family: Arial, sans-serif;
+  line-height: 135%;
+  cursor: pointer;
+}
+.score-wrap .item-wrap .custom-checkbox .checkbox {
+  position: relative;
+  top: -6px;
+  margin: 0 1px 0 0;
+  cursor: pointer;
+}
+.score-wrap .item-wrap .custom-checkbox .checkbox:before {
+  transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+  transform: rotate(-45deg) scale(0, 0);
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 2px;
+  z-index: 1;
+  width: 12px;
+  height: 6px;
+  border: 2px solid #16a085;
+  border-top-style: none;
+  border-right-style: none;
+}
+.score-wrap .item-wrap .custom-checkbox .checkbox:checked:before {
+  transform: rotate(-45deg) scale(1, 1);
+}
+.score-wrap .item-wrap .custom-checkbox .checkbox:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border: 2px solid #f2f2f2;
+  cursor: pointer;
+}
+.score-wrap .item-wrap .danger .fail-pic {
+  transform: rotateZ(-30deg);
+  width: 76px;
+  height: 76px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: -20px;
+  background: url(../images/fail.png) no-repeat center;
+  background-size: contain;
+}
 .score-wrap .item-wrap li {
-  padding: 5px 10px;
+  border-bottom: 1px dotted #ddd;
   margin: 0 5px;
-  border-bottom: 1px dashed #ddd;
+  position: relative;
+  padding: 10px 10px;
+  overflow: hidden;
 }
 .score-wrap .item-wrap li p {
   margin: 0;
-}
-.score-wrap .item-wrap li:nth-child(2n) {
-  background-color: #d9edf7;
 }
