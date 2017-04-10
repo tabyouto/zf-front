@@ -6,6 +6,7 @@ import routes from './config/routes.js';
 import commonAjax from './common/commonAjax.js'
 import store from './store'
 import {mapActions} from 'vuex';
+import jquery from 'jquery';
 
 Vue.use(VueRouter);
 Vue.config.devtools = true;
@@ -57,9 +58,21 @@ socket.on('connect', function(){
 
 socket.on('finishAllDegree',function(data) {
   console.log('11111');
-  console.log(data);
-});
+  console.log(jquery('.notification-custom').length);
+  if(jquery('.notification-custom').length>0) {
+    jquery('.notification-custom').text('已完成'+data);
+    if(data=='100%') {
+      jquery('.mask').remove();
+      alert('请重新点击获取学位课绩点');
+    }
+  }else {
+    jquery('.custom-mask').remove();
+    var notice = '<div class="mask" style="position: fixed;top: 0;bottom:0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.6);"><span class="notification-custom">已完成'+ data +'</span></div>';
 
+    jquery('body').append(notice);
+  }
+
+});
 
 
 

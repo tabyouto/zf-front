@@ -1,7 +1,10 @@
 <template>
   <div class="score-wrap">
     <div class="score-list">
-      <h1 class="text-center score-title">  <router-link :to="{ name: 'index'}"><i class="iconFont">&#xe610;</i></router-link>  成绩单</h1>
+      <h1 class="text-center score-title">
+        <router-link :to="{ name: 'index'}"><i class="iconFont">&#xe610;</i></router-link>
+        成绩单
+      </h1>
       <div class="item-wrap">
         <ul>
           <li v-for="item in scoreList" v-bind:class="{'danger': item.jd==0}" v-on:click="selectScore(item.id)">
@@ -32,18 +35,33 @@
       </div>
 
       <div class="btn-wrap">
-        <button class="btn btn-default btn-success" v-on:click="calSelectedScore" type="button" :disabled="selectedScore.length==0">
+        <button class="btn btn-default btn-success" v-on:click="calSelectedScore" type="button"
+                :disabled="selectedScore.length==0">
           计算选中课程绩点
         </button>
       </div>
     </div>
     <loading-component v-if="editFlag"></loading-component>
+    <div class="custom-mask" v-show="show">
+      <notification-sec type="pending">{{loadingText}}</notification-sec>
+    </div>
   </div>
 </template>
+<style scoped>
+  .custom-mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+</style>
 <script>
   import {fetchSpecificSchedule, fetchDegreeList} from '../../common/commonAjax.js';
   import {numDiv, numAdd, numMulti} from '../../common/util';
   import LoadingComponent from '../../components/loading.vue';
+  import notificationSec from '../../components/showPrompt.vue'
   export default{
     data(){
       return {
@@ -52,19 +70,22 @@
         result: 0,
         calculating: false,
         selectedScore: [],
-        selectedCalResult: 0
+        selectedCalResult: 0,
+        show: false,
+        loadingText: '正在获取课程'
       }
     },
     components: {
-      'loading-component': LoadingComponent
+      'loading-component': LoadingComponent,
+      'notification-sec': notificationSec
     },
     methods: {
       selectScore: function (data) {
         let index = this.selectedScore.indexOf(data);
-        if( index== -1) {
+        if (index == -1) {
           this.selectedScore.push(data);
-        }else {
-          this.selectedScore.splice(index,1);
+        } else {
+          this.selectedScore.splice(index, 1);
         }
       },
       /**
@@ -79,32 +100,38 @@
           class_passwd: localStorage.getItem('classPasswd'),
           token: sessionStorage.getItem('token')
         }).then(function (res) {
+          console.log(res);
           that.editFlag = false;
-          if(res.hasOwnProperty('result')) {
-            alert('正在获取学位课成绩，请稍等');
-          }else {
+          if (res.hasOwnProperty('status')) {
+            that.show = true;
+          } else {
             let list = res.info.list.split(',');
             let scoreList = JSON.parse(sessionStorage.getItem('allScore')).scoreData;
             let countRes = 0;
+            let tmp = [];
             list.forEach(function (item) {
               for (let i = scoreList.length - 1; i > 0; i--) {
-                if (item == scoreList[i]['id']) {
+                if (item == scoreList[i]['id']) { //获得学位课
+                  tmp = [];
                   for (let j = scoreList.length - 1; j > 0; j--) {
-                    if (scoreList[i]['id'] == scoreList[j]['id'] && scoreList[i]['score'] != scoreList[j]['score']) {
-                      if(scoreList[i]['score'] > scoreList[j]['score']) {
-                        countRes = numAdd(countRes, numMulti(scoreList[i]['score'], scoreList[i]['jd']));
-                      }else {
-                        countRes = numAdd(countRes, numMulti(scoreList[j]['score'], scoreList[j]['jd']));
-                      }
-                    }else {
-                      countRes = numAdd(countRes, numMulti(scoreList[i]['score'], scoreList[i]['jd']));
+                    if (scoreList[i]['id'] == scoreList[j]['id']) {
+                      tmp.push(scoreList[j]['jd']);
                     }
                   }
-                  break;
+                  console.log(tmp);
+                  if(tmp.length == 2) {
+                    if(tmp[0] > tmp[1]) {
+                      countRes = numAdd(countRes, numMulti(scoreList[i]['score'], tmp[0]));
+                    }else {
+                      countRes = numAdd(countRes, numMulti(scoreList[i]['score'], tmp[1]));
+                    }
+                  }else {
+                    countRes = numAdd(countRes, numMulti(scoreList[i]['score'], tmp[0]));
+                  }
                 }
               }
             });
-            that.result = numDiv(countRes, res.info.score);
+            that.result = numDiv(countRes, res.info.score).toFixed(3);
           }
           that.calculating = false;
         }).then(function () {
@@ -120,15 +147,19 @@
         let tmpAll = 0;
         let tmpDiv = 0;
         this.selectedScore.forEach(function (item) {
-          for(let i = scoreList.length-1;i > 0; i--) {
-            if(scoreList[i]['id'] == item) {
+          for (let i = scoreList.length - 1; i > 0; i--) {
+            if (scoreList[i]['id'] == item) {
               tmpAll = numAdd(tmpAll, numMulti(scoreList[i]['score'], scoreList[i]['jd']));
               tmpDiv = numAdd(tmpDiv, scoreList[i]['score']);
               break;
             }
           }
         });
-        this.selectedCalResult = numDiv(tmpAll,tmpDiv);
+        this.selectedCalResult = numDiv(tmpAll, tmpDiv);
+      },
+      test: function () {
+        this.show = !this.show;
+
       }
     },
 
